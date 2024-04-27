@@ -1,0 +1,182 @@
+[gd_scene load_steps=15 format=3 uid="uid://bbpcpwamap5es"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_1oox0"]
+[ext_resource type="PackedScene" uid="uid://ouvxhxj4frhx" path="res://components/page_header.tscn" id="1_w0u1t"]
+[ext_resource type="Texture2D" uid="uid://b21quislkdqm6" path="res://assets/images/app_notification.svg" id="2_7sxc1"]
+[ext_resource type="Texture2D" uid="uid://cfna6xdmguusr" path="res://assets/images/send_now.png" id="3_3xtky"]
+[ext_resource type="Texture2D" uid="uid://bgmlbbkmnoolf" path="res://assets/images/send_after.png" id="4_pooqf"]
+[ext_resource type="Texture2D" uid="uid://1p1gxc3esu2g" path="res://assets/images/cancel.png" id="5_aus1c"]
+[ext_resource type="Texture2D" uid="uid://bgo5e4ifcqc6h" path="res://assets/images/send_recurring.png" id="6_06t6t"]
+[ext_resource type="Texture2D" uid="uid://dctotegrnnv65" path="res://assets/images/send_grouped.png" id="7_o4apv"]
+[ext_resource type="Texture2D" uid="uid://c7r6r61jlqwyy" path="res://assets/images/send_custom.png" id="7_qfbui"]
+[ext_resource type="Texture2D" uid="uid://d2nygnke872is" path="res://assets/images/tag.png" id="9_qemld"]
+[ext_resource type="Texture2D" uid="uid://ba78rt2fijhjd" path="res://assets/images/send_big_image.png" id="10_ger5h"]
+[ext_resource type="Texture2D" uid="uid://d3vsk5udi3ln2" path="res://assets/images/send_big_text.png" id="11_8l7br"]
+[ext_resource type="PackedScene" uid="uid://77vnvy7vrde5" path="res://components/toast_message.tscn" id="13_qmghp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ymwp"]
+font_size = 32
+font_color = Color(0.453125, 0.453125, 0.453125, 1)
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1oox0")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[node name="Header" parent="." instance=ExtResource("1_w0u1t")]
+layout_mode = 1
+header_text = "App Notification Demo"
+header_icon = ExtResource("2_7sxc1")
+icon_color = Color(0, 0.731812, 0.851563, 1)
+
+[node name="Body" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="AllActions" type="VBoxContainer" parent="Body"]
+layout_mode = 2
+theme_override_constants/separation = 144
+
+[node name="BasicActions" type="VBoxContainer" parent="Body/AllActions"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Body/AllActions/BasicActions"]
+layout_mode = 2
+text = "Basic"
+label_settings = SubResource("LabelSettings_5ymwp")
+horizontal_alignment = 1
+
+[node name="Actions" type="VBoxContainer" parent="Body/AllActions/BasicActions"]
+layout_mode = 2
+theme_override_constants/separation = 84
+
+[node name="SendNowButton" type="Button" parent="Body/AllActions/BasicActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Send Now"
+icon = ExtResource("3_3xtky")
+
+[node name="AfterContainer" type="HBoxContainer" parent="Body/AllActions/BasicActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+
+[node name="SendAfter" type="Button" parent="Body/AllActions/BasicActions/Actions/AfterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Send After (10 Secs)"
+icon = ExtResource("4_pooqf")
+
+[node name="CancelAfter" type="Button" parent="Body/AllActions/BasicActions/Actions/AfterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Cancel
+"
+icon = ExtResource("5_aus1c")
+
+[node name="SendRecurring" type="Button" parent="Body/AllActions/BasicActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+toggle_mode = true
+text = "Send recurring (30 Secs)"
+icon = ExtResource("6_06t6t")
+
+[node name="AdvancedActions" type="VBoxContainer" parent="Body/AllActions"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Body/AllActions/AdvancedActions"]
+layout_mode = 2
+text = "Advanced
+"
+label_settings = SubResource("LabelSettings_5ymwp")
+horizontal_alignment = 1
+
+[node name="Actions" type="VBoxContainer" parent="Body/AllActions/AdvancedActions"]
+layout_mode = 2
+theme_override_constants/separation = 84
+
+[node name="IsGrouped" type="CheckBox" parent="Body/AllActions/AdvancedActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "If checked, all the advanced Notifications will be grouped"
+focus_mode = 0
+text = "Is Grouped"
+icon = ExtResource("7_o4apv")
+flat = true
+icon_alignment = 2
+
+[node name="SendCustom" type="Button" parent="Body/AllActions/AdvancedActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Send Custom"
+icon = ExtResource("7_qfbui")
+
+[node name="SendTagged" type="Button" parent="Body/AllActions/AdvancedActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Send Tagged"
+icon = ExtResource("9_qemld")
+
+[node name="SendBigImage" type="Button" parent="Body/AllActions/AdvancedActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+toggle_mode = true
+text = "Send Big Image"
+icon = ExtResource("10_ger5h")
+
+[node name="SendBigText" type="Button" parent="Body/AllActions/AdvancedActions/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+toggle_mode = true
+text = "Send Big Text"
+icon = ExtResource("11_8l7br")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ToastMessage" parent="." instance=ExtResource("13_qmghp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+
+[connection signal="pressed" from="Body/AllActions/BasicActions/Actions/SendNowButton" to="." method="_on_send_now_button_pressed"]
+[connection signal="pressed" from="Body/AllActions/BasicActions/Actions/AfterContainer/SendAfter" to="." method="_on_send_after_pressed"]
+[connection signal="pressed" from="Body/AllActions/BasicActions/Actions/AfterContainer/CancelAfter" to="." method="_on_cancel_after_pressed"]
+[connection signal="toggled" from="Body/AllActions/BasicActions/Actions/SendRecurring" to="." method="_on_send_recurring_toggled"]
+[connection signal="toggled" from="Body/AllActions/AdvancedActions/Actions/IsGrouped" to="." method="_on_is_grouped_toggled"]
+[connection signal="pressed" from="Body/AllActions/AdvancedActions/Actions/SendCustom" to="." method="_on_send_custom_pressed"]
+[connection signal="pressed" from="Body/AllActions/AdvancedActions/Actions/SendTagged" to="." method="_on_send_tagged_pressed"]
+[connection signal="pressed" from="Body/AllActions/AdvancedActions/Actions/SendBigImage" to="." method="_on_send_big_image_pressed"]
+[connection signal="pressed" from="Body/AllActions/AdvancedActions/Actions/SendBigText" to="." method="_on_send_big_text_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,156 @@
+[gd_scene load_steps=8 format=3 uid="uid://vvqmwq8fslpi"]
+
+[ext_resource type="Script" path="res://android_permission.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://chp7st01uwsdb" path="res://assets/default.png" id="4_qecyq"]
+[ext_resource type="PackedScene" path="res://components/toast_message.tscn" id="6_7wc7m"]
+[ext_resource type="PackedScene" path="res://components/page_header.tscn" id="7_laggm"]
+[ext_resource type="Texture2D" uid="uid://dbv1wni4r2ms3" path="res://assets/request.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cw70m42ia8x4t" path="res://assets/key.svg" id="8_5awji"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_fcgsa"]
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[node name="PageHeader" parent="." instance=ExtResource("7_laggm")]
+layout_mode = 1
+header_text = "Android Permission Demo"
+header_icon = ExtResource("8_5awji")
+icon_color = Color(0.949219, 0.676226, 0.0296631, 1)
+
+[node name="Body" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 36
+
+[node name="MarginContainer" type="MarginContainer" parent="Body"]
+layout_mode = 2
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 72
+theme_override_constants/margin_right = 72
+theme_override_constants/margin_bottom = 72
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Body/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="ReadExternalStorage" type="HBoxContainer" parent="Body/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="CheckBox" type="CheckBox" parent="Body/MarginContainer/VBoxContainer/ReadExternalStorage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+button_group = SubResource("ButtonGroup_fcgsa")
+text = "Read External Storage "
+
+[node name="Status" type="TextureRect" parent="Body/MarginContainer/VBoxContainer/ReadExternalStorage"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_qecyq")
+
+[node name="ReadContacts" type="HBoxContainer" parent="Body/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="CheckBox" type="CheckBox" parent="Body/MarginContainer/VBoxContainer/ReadContacts"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+button_group = SubResource("ButtonGroup_fcgsa")
+text = "Read Contacts"
+
+[node name="Status" type="TextureRect" parent="Body/MarginContainer/VBoxContainer/ReadContacts"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_qecyq")
+
+[node name="PostNotification" type="HBoxContainer" parent="Body/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="CheckBox" type="CheckBox" parent="Body/MarginContainer/VBoxContainer/PostNotification"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+button_group = SubResource("ButtonGroup_fcgsa")
+text = "Post Notification"
+
+[node name="Status" type="TextureRect" parent="Body/MarginContainer/VBoxContainer/PostNotification"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_qecyq")
+
+[node name="ReadCalendar" type="HBoxContainer" parent="Body/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="CheckBox" type="CheckBox" parent="Body/MarginContainer/VBoxContainer/ReadCalendar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+button_group = SubResource("ButtonGroup_fcgsa")
+text = "Read Calendar"
+
+[node name="Status" type="TextureRect" parent="Body/MarginContainer/VBoxContainer/ReadCalendar"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_qecyq")
+
+[node name="Actions" type="MarginContainer" parent="Body"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 36
+
+[node name="RequestPermissionButton" type="Button" parent="Body/Actions"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/h_separation = 24
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "Request Permission"
+icon = ExtResource("8")
+
+[node name="ToastMessage" parent="." instance=ExtResource("6_7wc7m")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Body/Actions/RequestPermissionButton" to="." method="_on_RequestPermissionButton_pressed"]

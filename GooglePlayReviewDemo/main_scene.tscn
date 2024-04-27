@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu23qg0a8xwja"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_ic18h"]
+[ext_resource type="Texture2D" uid="uid://c7n8niyoaim4s" path="res://assets/in_app_review.svg" id="3_fpbt3"]
+[ext_resource type="Theme" uid="uid://x230jm3e6crg" path="res://assets/button_theme.tres" id="4_us11o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_miran"]
+line_spacing = 4.0
+font_size = 35
+font_color = Color(0.821702, 0.777161, 0.835938, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1d3c0"]
+font_size = 56
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ic18h")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[node name="Body" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 36
+
+[node name="MarginContainer" type="MarginContainer" parent="Body"]
+layout_mode = 2
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 72
+theme_override_constants/margin_bottom = 48
+
+[node name="Description" type="Label" parent="Body/MarginContainer"]
+layout_mode = 2
+text = "Note: Clicking on \"Launch In-App Review\" may not lunch the dialog, if the review is already done, app not in playstore  or if review limiter is applied. 
+
+For more info  Check the Google Play in App Reviews documentation"
+label_settings = SubResource("LabelSettings_miran")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Actions" type="MarginContainer" parent="Body"]
+layout_mode = 2
+theme_override_constants/margin_top = 84
+theme_override_constants/margin_bottom = 84
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Body/Actions"]
+layout_mode = 2
+theme_override_constants/separation = 96
+
+[node name="InAppReviewButton" type="Button" parent="Body/Actions/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("4_us11o")
+theme_override_font_sizes/font_size = 40
+text = "Launch In-App Review"
+
+[node name="InStoreReviewButton" type="Button" parent="Body/Actions/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("4_us11o")
+theme_override_font_sizes/font_size = 40
+text = "Launch In-Store Review"
+
+[node name="Header" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.2
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Container" type="HBoxContainer" parent="Header"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Icon" type="TextureRect" parent="Header/Container"]
+modulate = Color(1, 0.821289, 0.285156, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("3_fpbt3")
+
+[node name="Title" type="Label" parent="Header/Container"]
+layout_mode = 2
+text = "Google Play Review Demo"
+label_settings = SubResource("LabelSettings_1d3c0")

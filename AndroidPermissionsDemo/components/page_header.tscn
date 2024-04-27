@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://ouvxhxj4frhx"]
+
+[sub_resource type="GDScript" id="GDScript_vinsu"]
+script/source = "@tool
+class_name PageHeader extends MarginContainer
+
+@export var header_text: String = \"<No Title>\"
+@export var text_color: Color = Color(\"#e9e9e9\")
+@export var header_icon: Texture2D
+@export var icon_color: Color = Color(\"#e9e9e9\")
+
+func _ready() -> void:
+	$Title/Image.texture = header_icon
+	$Title/Image.visible = header_icon != null
+	$Title/Label.text = header_text
+	$Title/Label.label_settings.font_color = text_color
+	if $Title/Image.visible:
+		$Title/Image.modulate = icon_color
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ru4vp"]
+font_size = 56
+font_color = Color(0.913725, 0.913725, 0.913725, 1)
+
+[node name="PageHeader" type="MarginContainer"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.15
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+script = SubResource("GDScript_vinsu")
+
+[node name="Title" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Image" type="TextureRect" parent="Title"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Title"]
+layout_mode = 2
+text = "<No Title>"
+label_settings = SubResource("LabelSettings_ru4vp")
